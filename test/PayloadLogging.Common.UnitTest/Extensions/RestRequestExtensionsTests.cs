@@ -20,7 +20,7 @@ namespace PayloadLogging.Common.UnitTest.Extensions
     [Fact]
     public void ToStringValue_NullDictionary_ReturnEmptyStrings()
     {
-      var result = ((Dictionary<string, string>) null).ToStringValue();
+      var result = ((Dictionary<string, string>)null).ToStringValue();
       result.Should().Be(string.Empty);
     }
     [Fact]
@@ -32,7 +32,7 @@ namespace PayloadLogging.Common.UnitTest.Extensions
         {"string2", "value2"}
       };
       var result = dictionary.ToStringValue();
-      result.Should().Be("{string1 : value1, string2 : value2}");
+      result.Should().Be("{'string1':'value1', 'string2':'value2'}");
     }
     #endregion
 

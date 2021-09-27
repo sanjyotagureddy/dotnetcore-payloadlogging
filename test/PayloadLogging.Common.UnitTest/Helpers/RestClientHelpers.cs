@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
 using PayloadLogging.Common.Models.PayloadLogging;
 using PayloadLogging.Common.Models.PayloadLogging.Enum;
 
@@ -9,26 +8,30 @@ namespace PayloadLogging.Common.UnitTest.Helpers
   {
     public static PayloadModel GetRequestPayload()
     {
-      var payloadContent = GetPayloadContent();
-      return new PayloadModel
+      return new()
       {
         CorrelationId = "202109111157004007-1921",
         Type = PayloadType.Request.ToString(),
         Source = "http://fakeapi.com/payload",
-        Payload = JsonConvert.SerializeObject(payloadContent)
+        Payload = "{\"Node1\":{\"Node2\":\"Value1\"}}",
+        Headers = "{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}",
+        Query = "?name=test",
+        HttpVerb = "POST"
       };
     }
 
     public static PayloadModel GetResponsePayload()
     {
-      var payloadContent = GetPayloadContent();
-      return new PayloadModel
+      return new()
       {
         CorrelationId = "202109111157004007-1921",
         Type = PayloadType.Request.ToString(),
         Source = "http://fakeapi.com/payload",
-        Payload = JsonConvert.SerializeObject(payloadContent),
-        ResponseCode = 200
+        Payload = "{\"Node1\":{\"Node2\":\"Value1\"}}",
+        ResponseCode = 200,
+        Headers = "{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}",
+        Query = "?name=test",
+        HttpVerb = "POST"
       };
     }
 
@@ -39,18 +42,5 @@ namespace PayloadLogging.Common.UnitTest.Helpers
         {Faker.Name.First(), Faker.Name.Last()},
         {Faker.Name.First(), Faker.Name.Last()}
       };
-
-    private static PayloadContent GetPayloadContent()
-      => new()
-      {
-        Query = "?api-version=1.0",
-        Headers = new Dictionary<string, string>
-        {
-          {"string1", "value1"}, {"string2", "value2"}
-        },
-        Body = "{\"Node1\":{\"Node2\":\"Value1\"}}"
-      };
-
-    
   }
 }

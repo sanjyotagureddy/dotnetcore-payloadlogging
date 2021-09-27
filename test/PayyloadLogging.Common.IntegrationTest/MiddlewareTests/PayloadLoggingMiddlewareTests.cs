@@ -20,7 +20,7 @@ namespace PayloadLogging.Common.IntegrationTest.MiddlewareTests
     {
       using var host = await CreateNewHostBuilder();
 
-      var response = await host.GetTestClient().GetAsync("https://fakeapi.com");
+      var response = await host.GetTestClient().GetAsync("https://fakeapi.com/");
 
       response.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
@@ -64,9 +64,9 @@ namespace PayloadLogging.Common.IntegrationTest.MiddlewareTests
               services.TryAddRestServiceCollection(null);
               var settings = new ApiSettings();
               ApiSettings.PayloadLoggingHost = "https://fakeloggingapi.com";
-              ApiSettings.IgnorePayloadUrls = "/ignore";
+              ApiSettings.IgnorePayloadUrls = "/health/live,/health/ready";
 
-              services.AddSingleton<ApiSettings>(settings);
+              services.AddSingleton(settings);
             })
             .Configure(app =>
             {

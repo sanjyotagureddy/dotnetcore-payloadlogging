@@ -35,7 +35,7 @@ namespace PayloadLogging.Common.Extensions
       {
         return string.Empty;
       }
-      var dictionaryString = dictionary.Aggregate("{", (current, keyValues) => current + (keyValues.Key + " : " + keyValues.Value + ", "));
+      var dictionaryString = dictionary.Aggregate("{", (current, keyValues) => current + ($"'{keyValues.Key}':'{ keyValues.Value }', "));
       return dictionaryString.TrimEnd(',', ' ') + "}";
     }
 

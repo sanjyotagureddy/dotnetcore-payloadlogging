@@ -42,7 +42,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
 
       result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
       result.IsSuccessful.Should().BeFalse();
-      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"Payload\":\"{\\\"Body\\\":\\\"{\\\\\\\"Node1\\\\\\\":{\\\\\\\"Node2\\\\\\\":\\\\\\\"Value1\\\\\\\"}}\\\",\\\"Headers\\\":{\\\"string1\\\":\\\"value1\\\",\\\"string2\\\":\\\"value2\\\"},\\\"Query\\\":\\\"?api-version=1.0\\\"}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
+      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
 
 
@@ -62,7 +62,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
 
       result.StatusCode.Should().Be(HttpStatusCode.Created);
       result.IsSuccessful.Should().BeTrue();
-      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"Payload\":\"{\\\"Body\\\":\\\"{\\\\\\\"Node1\\\\\\\":{\\\\\\\"Node2\\\\\\\":\\\\\\\"Value1\\\\\\\"}}\\\",\\\"Headers\\\":{\\\"string1\\\":\\\"value1\\\",\\\"string2\\\":\\\"value2\\\"},\\\"Query\\\":\\\"?api-version=1.0\\\"}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
+      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
 
     #endregion
@@ -85,7 +85,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
 
       result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
       result.IsSuccessful.Should().BeFalse();
-      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"Payload\":\"{\\\"Body\\\":\\\"{\\\\\\\"Node1\\\\\\\":{\\\\\\\"Node2\\\\\\\":\\\\\\\"Value1\\\\\\\"}}\\\",\\\"Headers\\\":{\\\"string1\\\":\\\"value1\\\",\\\"string2\\\":\\\"value2\\\"},\\\"Query\\\":\\\"?api-version=1.0\\\"}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
+      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
 
 
@@ -105,7 +105,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
 
       result.StatusCode.Should().Be(HttpStatusCode.Accepted);
       result.IsSuccessful.Should().BeTrue();
-      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"Payload\":\"{\\\"Body\\\":\\\"{\\\\\\\"Node1\\\\\\\":{\\\\\\\"Node2\\\\\\\":\\\\\\\"Value1\\\\\\\"}}\\\",\\\"Headers\\\":{\\\"string1\\\":\\\"value1\\\",\\\"string2\\\":\\\"value2\\\"},\\\"Query\\\":\\\"?api-version=1.0\\\"}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
+      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
 
     #endregion
@@ -162,7 +162,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
 
       result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
       result.IsSuccessful.Should().BeFalse();
-      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"Payload\":\"{\\\"Body\\\":\\\"{\\\\\\\"Node1\\\\\\\":{\\\\\\\"Node2\\\\\\\":\\\\\\\"Value1\\\\\\\"}}\\\",\\\"Headers\\\":{\\\"string1\\\":\\\"value1\\\",\\\"string2\\\":\\\"value2\\\"},\\\"Query\\\":\\\"?api-version=1.0\\\"}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
+      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
 
     [Fact]
@@ -176,11 +176,11 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       _mockRestClient.Setup(x => x.ExecuteGetAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(mockResponse);
 
-      var result = await _fakeClass.GetById("http://fakeapi.com/", "payload","13654", null, RestClientHelpers.GetRandomDictionary());
+      var result = await _fakeClass.GetById("http://fakeapi.com/", "payload", "13654", null, RestClientHelpers.GetRandomDictionary());
 
       result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
       result.IsSuccessful.Should().BeFalse();
-      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"Payload\":\"{\\\"Body\\\":\\\"{\\\\\\\"Node1\\\\\\\":{\\\\\\\"Node2\\\\\\\":\\\\\\\"Value1\\\\\\\"}}\\\",\\\"Headers\\\":{\\\"string1\\\":\\\"value1\\\",\\\"string2\\\":\\\"value2\\\"},\\\"Query\\\":\\\"?api-version=1.0\\\"}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
+      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
 
 
@@ -200,7 +200,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
 
       result.StatusCode.Should().Be(HttpStatusCode.OK);
       result.IsSuccessful.Should().BeTrue();
-      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"Payload\":\"{\\\"Body\\\":\\\"{\\\\\\\"Node1\\\\\\\":{\\\\\\\"Node2\\\\\\\":\\\\\\\"Value1\\\\\\\"}}\\\",\\\"Headers\\\":{\\\"string1\\\":\\\"value1\\\",\\\"string2\\\":\\\"value2\\\"},\\\"Query\\\":\\\"?api-version=1.0\\\"}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
+      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
 
     [Fact]
@@ -219,7 +219,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
 
       result.StatusCode.Should().Be(HttpStatusCode.OK);
       result.IsSuccessful.Should().BeTrue();
-      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"Payload\":\"{\\\"Body\\\":\\\"{\\\\\\\"Node1\\\\\\\":{\\\\\\\"Node2\\\\\\\":\\\\\\\"Value1\\\\\\\"}}\\\",\\\"Headers\\\":{\\\"string1\\\":\\\"value1\\\",\\\"string2\\\":\\\"value2\\\"},\\\"Query\\\":\\\"?api-version=1.0\\\"}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
+      result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
 
     #endregion

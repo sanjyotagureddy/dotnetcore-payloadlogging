@@ -17,13 +17,17 @@
 		</PackageReference>
 		<PackageReference Include="Faker.Net" Version="1.5.148" />
 		<PackageReference Include="FluentAssertions" Version="6.1.0" />
+		<PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2021.2.1">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Microsoft.AspNetCore.TestHost" Version="5.0.10" />
 		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
 		<PackageReference Include="Moq" Version="4.16.1" />
 		<PackageReference Include="MoqRestSharp.Helpers" Version="2021.4.30" />
 		<PackageReference Include="xunit" Version="2.4.1" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.3" />
-		<PackageReference Include="ReportGenerator" Version="4.8.12" />
+		<PackageReference Include="ReportGenerator" Version="4.8.13" />
 	</ItemGroup>
 
   <ItemGroup>

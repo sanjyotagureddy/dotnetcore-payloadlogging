@@ -61,8 +61,5 @@ steps:
   displayName: 'Resharper code quality'
   enabled: true
   inputs:
-    solutionOrProjectPath: 'payloadlogging-api.sln'
+    solutionOrProjectPath: 'src/PayloadLogging.Common/PayloadLogging.Common.csproj'
     failBuildLevelSelector: 'Warning'
-    failBuildOnCodeIssues: false
-    additionalArguments: '--disable-settings-layers=SolutionPersonal --properties:Configuration=$(buildConfiguration) --profile=$(solution).DotSettings --verbosity=INFO --severity=WARNING --format=Html'
-    resultsOutputFilePath: '$(Build.SourcesDirectory)\ResharperCodeQualityResults'

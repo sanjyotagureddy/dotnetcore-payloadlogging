@@ -58,6 +58,11 @@ steps:
     reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
 
 - task: ResharperCli@2
+  displayName: 'Resharper code quality'
+  enabled: true
   inputs:
     solutionOrProjectPath: '$(solution)'
     failBuildLevelSelector: 'Warning'
+    failBuildOnCodeIssues: false
+    additionalArguments: '--disable-settings-layers=SolutionPersonal --properties:Configuration=$(buildConfiguration) --profile=$(solution).DotSettings --verbosity=INFO --severity=WARNING --format=Html'
+    resultsOutputFilePath: '$(Build.SourcesDirectory)\ResharperCodeQualityResults'

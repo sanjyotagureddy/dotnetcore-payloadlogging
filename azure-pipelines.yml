@@ -31,17 +31,6 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-# - task: VSTest@2
-#   inputs:
-#     platform: '$(buildPlatform)'
-#     configuration: '$(buildConfiguration)'
-
-# - task: DotNetCoreCLI@2
-#   inputs:
-#     command: test
-#     projects: '**/*Test/*.csproj'
-#     arguments: '--configuration $(buildConfiguration)'
-
 # Run all tests with "/p:CollectCoverage=true /p:CoverletOutputFormat=cobertura" to generate the code coverage file
 - task: DotNetCoreCLI@2
   displayName: Running Tests
@@ -67,3 +56,8 @@ steps:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
     reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
+
+- task: ResharperCli@2
+  inputs:
+    solutionOrProjectPath: '$(solution)'
+    failBuildLevelSelector: 'Warning'

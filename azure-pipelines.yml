@@ -61,5 +61,5 @@ steps:
   displayName: 'Resharper code quality'
   enabled: true
   inputs:
-    solutionOrProjectPath: 'src/PayloadLogging.Common/PayloadLogging.Common.csproj'
+    solutionOrProjectPath: 'payloadlogging-api.sln'
     failBuildLevelSelector: 'Warning'

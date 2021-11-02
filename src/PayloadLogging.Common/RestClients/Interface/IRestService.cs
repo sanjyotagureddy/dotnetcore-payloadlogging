@@ -4,7 +4,6 @@ using RestSharp;
 
 namespace PayloadLogging.Common.RestClients.Interface
 {
-
   public interface IRestService<T>
   {
     Task<IRestResponse> Get(string url, string methodName, string id, IDictionary<string, string> headers = null, IDictionary<string, string> queryParameters = null);

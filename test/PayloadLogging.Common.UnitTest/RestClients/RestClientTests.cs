@@ -38,13 +38,12 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       _mockRestClient.Setup(x => x.ExecutePostAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(mockResponse);
 
-      var result = await _fakeClass.Post("http://fakeapi.com", "payload", RestClientHelpers.GetRequestPayload(), RestClientHelpers.GetRandomDictionary());
+      var result = await _fakeClass.Post("http://fakeapi.com", "payload", RestClientHelpers.GetRequestPayload(), RestClientHelpers.GetRandomDictionary()).ConfigureAwait(false);
 
       result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
       result.IsSuccessful.Should().BeFalse();
       result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
-
 
     [Fact]
     public async Task POST_Returns201Response()
@@ -58,7 +57,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       _mockRestClient.Setup(x => x.ExecutePostAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(mockResponse);
 
-      var result = await _fakeClass.Post("http://fakeapi.com/", "payload", RestClientHelpers.GetRequestPayload(), null, RestClientHelpers.GetRandomDictionary());
+      var result = await _fakeClass.Post("http://fakeapi.com/", "payload", RestClientHelpers.GetRequestPayload(), null, RestClientHelpers.GetRandomDictionary()).ConfigureAwait(false);
 
       result.StatusCode.Should().Be(HttpStatusCode.Created);
       result.IsSuccessful.Should().BeTrue();
@@ -66,7 +65,6 @@ namespace PayloadLogging.Common.UnitTest.RestClients
     }
 
     #endregion
-
 
     #region PUT
     [Fact]
@@ -81,13 +79,12 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       _mockRestClient.Setup(x => x.ExecuteAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(mockResponse);
 
-      var result = await _fakeClass.Put("http://fakeapi.com", "payload", RestClientHelpers.GetRequestPayload(), RestClientHelpers.GetRandomDictionary());
+      var result = await _fakeClass.Put("http://fakeapi.com", "payload", RestClientHelpers.GetRequestPayload(), RestClientHelpers.GetRandomDictionary()).ConfigureAwait(false);
 
       result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
       result.IsSuccessful.Should().BeFalse();
       result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
-
 
     [Fact]
     public async Task PUT_Returns202Response()
@@ -101,7 +98,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       _mockRestClient.Setup(x => x.ExecuteAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(mockResponse);
 
-      var result = await _fakeClass.Put("http://fakeapi.com/", "payload", RestClientHelpers.GetRequestPayload(), null, RestClientHelpers.GetRandomDictionary());
+      var result = await _fakeClass.Put("http://fakeapi.com/", "payload", RestClientHelpers.GetRequestPayload(), null, RestClientHelpers.GetRandomDictionary()).ConfigureAwait(false);
 
       result.StatusCode.Should().Be(HttpStatusCode.Accepted);
       result.IsSuccessful.Should().BeTrue();
@@ -122,11 +119,10 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       _mockRestClient.Setup(x => x.ExecuteAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(mockResponse);
 
-      var result = await _fakeClass.Delete("http://fakeapi.com", "payload", 2, RestClientHelpers.GetRandomDictionary());
+      var result = await _fakeClass.Delete("http://fakeapi.com", "payload", 2, RestClientHelpers.GetRandomDictionary()).ConfigureAwait(false);
 
       result.Should().BeFalse();
     }
-
 
     [Fact]
     public async Task Delete_Returns202Response()
@@ -140,7 +136,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       _mockRestClient.Setup(x => x.ExecuteAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(mockResponse);
 
-      var result = await _fakeClass.Delete("http://fakeapi.com/", "payload", 1, null, RestClientHelpers.GetRandomDictionary());
+      var result = await _fakeClass.Delete("http://fakeapi.com/", "payload", 1, null, RestClientHelpers.GetRandomDictionary()).ConfigureAwait(false);
       result.Should().BeTrue();
     }
 
@@ -158,7 +154,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       _mockRestClient.Setup(x => x.ExecuteGetAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(mockResponse);
 
-      var result = await _fakeClass.Get("http://fakeapi.com/", "payload", null, RestClientHelpers.GetRandomDictionary());
+      var result = await _fakeClass.Get("http://fakeapi.com/", "payload", null, RestClientHelpers.GetRandomDictionary()).ConfigureAwait(false);
 
       result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
       result.IsSuccessful.Should().BeFalse();
@@ -176,13 +172,12 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       _mockRestClient.Setup(x => x.ExecuteGetAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(mockResponse);
 
-      var result = await _fakeClass.GetById("http://fakeapi.com/", "payload", "13654", null, RestClientHelpers.GetRandomDictionary());
+      var result = await _fakeClass.GetById("http://fakeapi.com/", "payload", "13654", null, RestClientHelpers.GetRandomDictionary()).ConfigureAwait(false);
 
       result.StatusCode.Should().Be(HttpStatusCode.BadRequest);
       result.IsSuccessful.Should().BeFalse();
       result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
-
 
     [Fact]
     public async Task Get_Returns200Response()
@@ -196,7 +191,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       _mockRestClient.Setup(x => x.ExecuteGetAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(mockResponse);
 
-      var result = await _fakeClass.Get("http://fakeapi.com/", "payload", null, RestClientHelpers.GetRandomDictionary());
+      var result = await _fakeClass.Get("http://fakeapi.com/", "payload", null, RestClientHelpers.GetRandomDictionary()).ConfigureAwait(false);
 
       result.StatusCode.Should().Be(HttpStatusCode.OK);
       result.IsSuccessful.Should().BeTrue();
@@ -215,7 +210,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       _mockRestClient.Setup(x => x.ExecuteGetAsync(It.IsAny<RestRequest>(), It.IsAny<CancellationToken>()))
         .ReturnsAsync(mockResponse);
 
-      var result = await _fakeClass.GetById("http://fakeapi.com/", "payload", "123", null, RestClientHelpers.GetRandomDictionary());
+      var result = await _fakeClass.GetById("http://fakeapi.com/", "payload", "123", null, RestClientHelpers.GetRandomDictionary()).ConfigureAwait(false);
 
       result.StatusCode.Should().Be(HttpStatusCode.OK);
       result.IsSuccessful.Should().BeTrue();

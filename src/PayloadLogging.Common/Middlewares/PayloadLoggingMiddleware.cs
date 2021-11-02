@@ -36,15 +36,15 @@ namespace PayloadLogging.Common.Middlewares
 
     public async Task Invoke(HttpContext context)
     {
-      var correlationId = await LogRequest(context);
-      await LogResponse(context, correlationId);
+      var correlationId = await LogRequest(context).ConfigureAwait(false);
+      await LogResponse(context, correlationId).ConfigureAwait(false);
     }
 
     private async Task<string> LogRequest(HttpContext context)
     {
       context.Request.EnableBuffering();
       await using var requestStream = _recyclableMemoryStreamManager.GetStream();
-      await context.Request.Body.CopyToAsync(requestStream);
+      await context.Request.Body.CopyToAsync(requestStream).ConfigureAwait(false);
       var requestBody = ReadStreamInChunks(requestStream);
       context.Request.Body.Position = 0;
 
@@ -55,7 +55,7 @@ namespace PayloadLogging.Common.Middlewares
 
       var payload = BuildPayloadModel(context, requestBody, PayloadType.Request);
 
-      var result = await _restService.Post(ApiSettings.PayloadLoggingHost, MethodName, payload);
+      var result = await _restService.Post(ApiSettings.PayloadLoggingHost, MethodName, payload).ConfigureAwait(false);
       if (!result.IsSuccessful)
       {
         _logger.LogWarning($"Failed to write request to Payload Api with CorrelationId: '{ payload.CorrelationId }', Error: {result.Content}");
@@ -70,11 +70,11 @@ namespace PayloadLogging.Common.Middlewares
       var originalBodyStream = context.Response.Body;
       await using var responseBody = _recyclableMemoryStreamManager.GetStream();
       context.Response.Body = responseBody;
-      await _next(context);
+      await _next(context).ConfigureAwait(false);
       context.Response.Body.Seek(0, SeekOrigin.Begin);
-      var requestBody = await new StreamReader(context.Response.Body).ReadToEndAsync();
+      var requestBody = await new StreamReader(context.Response.Body).ReadToEndAsync().ConfigureAwait(false);
       context.Response.Body.Seek(0, SeekOrigin.Begin);
-      await responseBody.CopyToAsync(originalBodyStream);
+      await responseBody.CopyToAsync(originalBodyStream).ConfigureAwait(false);
 
       if (IsUrlIgnored(context.Request.Path))
       {
@@ -83,7 +83,7 @@ namespace PayloadLogging.Common.Middlewares
 
       var payload = BuildPayloadModel(context, requestBody, PayloadType.Response, correlationId);
 
-      var result = await _restService.Post(ApiSettings.PayloadLoggingHost, MethodName, payload);
+      var result = await _restService.Post(ApiSettings.PayloadLoggingHost, MethodName, payload).ConfigureAwait(false);
       if (!result.IsSuccessful)
       {
         _logger.LogWarning($"Failed to write request to Payload Api with CorrelationId: '{ payload.CorrelationId }', Error: {result.Content}");
@@ -132,13 +132,13 @@ namespace PayloadLogging.Common.Middlewares
       }
 
       var stringBuilder = new StringBuilder()
-        .AppendLine($"Http Response Information:")
-        .AppendLine($"Payload Type: {payload.Type}")
-        .AppendLine($"Request Type: {payload.HttpVerb}")
-        .AppendLine($"Source: {payload.Source}")
-        .AppendLine($"Headers: {payload.Headers}")
-        .AppendLine($"StatusCode: {payload.ResponseCode}")
-        .AppendLine($"Response Body: {payload.Payload}");
+        .AppendLine("Http Response Information:")
+        .Append("Payload Type: ").AppendLine(payload.Type)
+        .Append("Request Type: ").AppendLine(payload.HttpVerb)
+        .Append("Source: ").AppendLine(payload.Source)
+        .Append("Headers: ").AppendLine(payload.Headers)
+        .Append("StatusCode: ").Append(payload.ResponseCode).AppendLine()
+        .Append("Response Body: ").AppendLine(payload.Payload);
 
       _logger.LogDebug(stringBuilder.ToString());
 

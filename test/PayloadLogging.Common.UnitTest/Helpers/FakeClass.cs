@@ -19,34 +19,34 @@ namespace PayloadLogging.Common.UnitTest.Helpers
       string methodName,
       IDictionary<string, string> headers = null,
       IDictionary<string, string> queryParameters = null)
-      => await _restService.Get(url, methodName, headers, queryParameters);
+      => await _restService.Get(url, methodName, headers, queryParameters).ConfigureAwait(false);
 
     public async Task<IRestResponse> GetById(string url,
       string methodName,
       string id,
       IDictionary<string, string> headers = null,
       IDictionary<string, string> queryParameters = null)
-      => await _restService.Get(url, methodName, id, headers, queryParameters);
+      => await _restService.Get(url, methodName, id, headers, queryParameters).ConfigureAwait(false);
 
     public async Task<IRestResponse> Post(string url,
       string methodName,
       PayloadModel body,
       IDictionary<string, string> headers = null,
       IDictionary<string, string> queryParameters = null)
-      => await _restService.Post(url, methodName, body, headers, queryParameters);
+      => await _restService.Post(url, methodName, body, headers, queryParameters).ConfigureAwait(false);
 
     public async Task<IRestResponse> Put(string url,
       string methodName,
       PayloadModel body,
       IDictionary<string, string> headers = null,
       IDictionary<string, string> queryParameters = null)
-      => await _restService.Put(url, methodName, body, headers, queryParameters);
+      => await _restService.Put(url, methodName, body, headers, queryParameters).ConfigureAwait(false);
 
     public async Task<bool> Delete(string url,
       string methodName,
       int id,
       IDictionary<string, string> headers = null,
       IDictionary<string, string> queryParameters = null)
-      => await _restService.Delete(url, methodName, id, headers, queryParameters);
+      => await _restService.Delete(url, methodName, id, headers, queryParameters).ConfigureAwait(false);
   }
 }

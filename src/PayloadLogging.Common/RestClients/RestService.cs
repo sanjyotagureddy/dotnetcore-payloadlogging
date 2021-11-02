@@ -27,7 +27,7 @@ namespace PayloadLogging.Common.RestClients
     public async Task<IRestResponse> Get(string url, string methodName, IDictionary<string, string> headers = null, IDictionary<string, string> queryParameters = null)
     {
       var request = BuildBaseRequest(Method.GET, url, methodName, headers, queryParameters);
-      return await _client.ExecuteGetAsync(request);
+      return await _client.ExecuteGetAsync(request).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -42,7 +42,7 @@ namespace PayloadLogging.Common.RestClients
     public async Task<IRestResponse> Get(string url, string methodName, string id, IDictionary<string, string> headers = null, IDictionary<string, string> queryParameters = null)
     {
       var request = BuildBaseRequest(Method.GET, url, $"{methodName}/{id}", headers, queryParameters);
-      return await _client.ExecuteGetAsync(request);
+      return await _client.ExecuteGetAsync(request).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ namespace PayloadLogging.Common.RestClients
     {
       var request = BuildBaseRequest(Method.POST, url, methodName, headers, queryParameters);
       request.AddJsonBody(body);
-      return await _client.ExecutePostAsync(request);
+      return await _client.ExecutePostAsync(request).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -74,7 +74,7 @@ namespace PayloadLogging.Common.RestClients
     {
       var request = BuildBaseRequest(Method.PUT, url, methodName, headers, queryParameters);
       request.AddJsonBody(body);
-      return await _client.ExecuteAsync(request);
+      return await _client.ExecuteAsync(request).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -89,7 +89,7 @@ namespace PayloadLogging.Common.RestClients
     public async Task<bool> Delete(string url, string methodName, int id, IDictionary<string, string> headers = null, IDictionary<string, string> queryParameters = null)
     {
       var request = BuildBaseRequest(Method.DELETE, url, methodName, headers, queryParameters);
-      var response = await _client.ExecuteAsync(request);
+      var response = await _client.ExecuteAsync(request).ConfigureAwait(false);
       return response.IsSuccessful;
     }
 
@@ -113,13 +113,10 @@ namespace PayloadLogging.Common.RestClients
         request.AddHeaders(headers);
       }
 
-
-      if (queryParameters != null)
+      if (queryParameters == null) return request;
+      foreach (var (key, value) in queryParameters)
       {
-        foreach (var (key, value) in queryParameters)
-        {
-          request.AddQueryParameter(key, value);
-        }
+        request.AddQueryParameter(key, value);
       }
 
       return request;

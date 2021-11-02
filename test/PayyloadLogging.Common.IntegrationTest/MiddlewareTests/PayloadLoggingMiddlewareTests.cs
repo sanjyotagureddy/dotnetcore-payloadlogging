@@ -18,9 +18,9 @@ namespace PayloadLogging.Common.IntegrationTest.MiddlewareTests
     [Fact]
     public async Task MiddlewareTest_ReturnsNotFoundForRequest()
     {
-      using var host = await CreateNewHostBuilder();
+      using var host = await CreateNewHostBuilder().ConfigureAwait(false);
 
-      var response = await host.GetTestClient().GetAsync("https://fakeapi.com/");
+      var response = await host.GetTestClient().GetAsync("https://fakeapi.com/").ConfigureAwait(false);
 
       response.StatusCode.Should().Be(HttpStatusCode.NotFound);
     }
@@ -28,7 +28,7 @@ namespace PayloadLogging.Common.IntegrationTest.MiddlewareTests
     [Fact]
     public async Task MiddlewareTest_ReturnsOkForRequest()
     {
-      using var host = await CreateNewHostBuilder();
+      using var host = await CreateNewHostBuilder().ConfigureAwait(false);
 
       var server = host.GetTestServer();
       server.BaseAddress = new Uri("https://example.com/A/Path/");
@@ -38,7 +38,7 @@ namespace PayloadLogging.Common.IntegrationTest.MiddlewareTests
         c.Request.Method = HttpMethods.Post;
         c.Request.Path = "/and/file.txt";
         c.Request.QueryString = new QueryString("?and=query");
-      });
+      }).ConfigureAwait(false);
 
       context.Request.Method.Should().Be(Method.POST.ToString());
       context.Request.Scheme.Should().Be("https");
@@ -73,6 +73,7 @@ namespace PayloadLogging.Common.IntegrationTest.MiddlewareTests
               app.UsePayloadLogging();
             });
         })
-        .StartAsync();
+        .StartAsync()
+        .ConfigureAwait(false);
   }
 }

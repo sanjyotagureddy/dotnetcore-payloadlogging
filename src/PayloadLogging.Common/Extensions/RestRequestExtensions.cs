@@ -31,7 +31,7 @@ namespace PayloadLogging.Common.Extensions
     /// <example>"{string1 : value1, string2 : value2}"</example>
     public static string ToStringValue(this IDictionary<string, string> dictionary)
     {
-      if (dictionary == null || !dictionary.Any())
+      if (dictionary?.Any() != true)
       {
         return string.Empty;
       }

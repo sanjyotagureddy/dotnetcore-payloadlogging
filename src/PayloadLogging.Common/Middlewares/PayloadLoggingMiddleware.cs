@@ -42,6 +42,7 @@ namespace PayloadLogging.Common.Middlewares
 
     private async Task<string> LogRequest(HttpContext context)
     {
+      const int tempNumber = 0;
       context.Request.EnableBuffering();
       await using var requestStream = _recyclableMemoryStreamManager.GetStream();
       await context.Request.Body.CopyToAsync(requestStream).ConfigureAwait(false);

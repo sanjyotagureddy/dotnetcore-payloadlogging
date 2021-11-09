@@ -13,6 +13,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  disable.coverage.autogenerate: 'true'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -69,10 +70,3 @@ steps:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(Build.SourcesDirectory)/CodeCoverage/Cobertura.xml'
     reportDirectory: '$(Build.SourcesDirectory)/CodeCoverage'
-
-- task: ResharperCli@2
-  displayName: 'Resharper code quality'
-  inputs:
-    solutionOrProjectPath: '$(solution)'
-    failBuildLevelSelector: 'Warning'
-    additionalArguments: '/disable-settings-layers:SolutionPersonal --properties:Configuration=$(Build.Configuration) --no-build' 

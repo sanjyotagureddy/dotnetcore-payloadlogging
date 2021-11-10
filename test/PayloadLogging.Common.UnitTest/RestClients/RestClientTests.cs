@@ -1,7 +1,4 @@
-﻿using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Moq;
 using Moq.RestSharp.Helpers;
 using PayloadLogging.Common.Models.PayloadLogging;
@@ -9,6 +6,9 @@ using PayloadLogging.Common.RestClients;
 using PayloadLogging.Common.RestClients.Interface;
 using PayloadLogging.Common.UnitTest.Helpers;
 using RestSharp;
+using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace PayloadLogging.Common.UnitTest.RestClients
@@ -26,6 +26,7 @@ namespace PayloadLogging.Common.UnitTest.RestClients
     }
 
     #region POST
+
     [Fact]
     public async Task POST_Returns400Response()
     {
@@ -64,9 +65,10 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
 
-    #endregion
+    #endregion POST
 
     #region PUT
+
     [Fact]
     public async Task PUT_Returns400Response()
     {
@@ -105,9 +107,10 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
 
-    #endregion
+    #endregion PUT
 
     #region Delete
+
     [Fact]
     public async Task Delete_Returns400Response()
     {
@@ -140,9 +143,10 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       result.Should().BeTrue();
     }
 
-    #endregion
+    #endregion Delete
 
     #region GET
+
     [Fact]
     public async Task GET_Returns400Response()
     {
@@ -217,7 +221,6 @@ namespace PayloadLogging.Common.UnitTest.RestClients
       result.Content.Should().Be("{\"Source\":\"http://fakeapi.com/payload\",\"HttpVerb\":\"POST\",\"Query\":\"?name=test\",\"Headers\":\"{'Ellie':'Rutherford', 'Nikko':'Skiles', 'Lucius':'Hartmann'}\",\"Payload\":\"{\\\"Node1\\\":{\\\"Node2\\\":\\\"Value1\\\"}}\",\"Type\":\"Request\",\"CorrelationId\":\"202109111157004007-1921\",\"ResponseCode\":200}");
     }
 
-    #endregion
-
+    #endregion GET
   }
 }

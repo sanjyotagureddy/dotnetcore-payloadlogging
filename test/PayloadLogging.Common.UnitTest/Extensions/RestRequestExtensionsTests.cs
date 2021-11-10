@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Primitives;
 using PayloadLogging.Common.Extensions;
+using System.Collections.Generic;
 using Xunit;
 
 namespace PayloadLogging.Common.UnitTest.Extensions
@@ -10,6 +10,7 @@ namespace PayloadLogging.Common.UnitTest.Extensions
   public class RestRequestExtensionsTests
   {
     #region ToStringValue
+
     [Fact]
     public void ToStringValue_EmptyDictionary_ReturnEmptyStrings()
     {
@@ -17,12 +18,14 @@ namespace PayloadLogging.Common.UnitTest.Extensions
       var result = dictionary.ToStringValue();
       result.Should().Be(string.Empty);
     }
+
     [Fact]
     public void ToStringValue_NullDictionary_ReturnEmptyStrings()
     {
       var result = ((Dictionary<string, string>)null).ToStringValue();
       result.Should().Be(string.Empty);
     }
+
     [Fact]
     public void ToStringValue_ValidDictionary_ReturnStrings()
     {
@@ -34,7 +37,8 @@ namespace PayloadLogging.Common.UnitTest.Extensions
       var result = dictionary.ToStringValue();
       result.Should().Be("{'string1':'value1', 'string2':'value2'}");
     }
-    #endregion
+
+    #endregion ToStringValue
 
     #region IQueryCollection to IDictionary<string,string>
 
@@ -61,7 +65,7 @@ namespace PayloadLogging.Common.UnitTest.Extensions
       resultDictionary.ContainsKey("string2").Should().BeTrue();
     }
 
-    #endregion
+    #endregion IQueryCollection to IDictionary<string,string>
 
     #region IHeaderDictionary to IDictionary<string,string>
 
@@ -86,6 +90,6 @@ namespace PayloadLogging.Common.UnitTest.Extensions
       resultDictionary.ContainsKey("string2").Should().BeTrue();
     }
 
-    #endregion
+    #endregion IHeaderDictionary to IDictionary<string,string>
   }
 }

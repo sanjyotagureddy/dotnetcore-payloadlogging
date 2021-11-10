@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.IO;
 using PayloadLogging.Common.Extensions;
@@ -12,6 +6,12 @@ using PayloadLogging.Common.Models.PayloadLogging;
 using PayloadLogging.Common.Models.PayloadLogging.Enum;
 using PayloadLogging.Common.RestClients.Interface;
 using PayloadLogging.Common.Settings;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace PayloadLogging.Common.Middlewares
 {
@@ -42,7 +42,6 @@ namespace PayloadLogging.Common.Middlewares
 
     private async Task<string> LogRequest(HttpContext context)
     {
-      const int tempNumber = 0;
       context.Request.EnableBuffering();
       await using var requestStream = _recyclableMemoryStreamManager.GetStream();
       await context.Request.Body.CopyToAsync(requestStream).ConfigureAwait(false);
@@ -124,10 +123,12 @@ namespace PayloadLogging.Common.Middlewares
             ? payloadCorrelationId
             : $"{DateTime.UtcNow:yyyyMMddHHmmssffff}-{payload.Payload.Length}";
           break;
+
         case PayloadType.Response:
           payload.CorrelationId = correlationId;
           payload.ResponseCode = context.Response.StatusCode;
           break;
+
         default:
           throw new InvalidOperationException("Invalid Payload type");
       }
@@ -167,6 +168,6 @@ namespace PayloadLogging.Common.Middlewares
       return textWriter.ToString();
     }
 
-    #endregion
+    #endregion Private methods
   }
 }

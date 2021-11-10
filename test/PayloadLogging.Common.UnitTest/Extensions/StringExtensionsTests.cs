@@ -1,6 +1,6 @@
-﻿using System.Text;
-using FluentAssertions;
+﻿using FluentAssertions;
 using PayloadLogging.Common.Extensions;
+using System.Text;
 using Xunit;
 
 namespace PayloadLogging.Common.UnitTest.Extensions
@@ -8,6 +8,7 @@ namespace PayloadLogging.Common.UnitTest.Extensions
   public class StringExtensionsTests
   {
     #region ToSnakeCase
+
     [Fact]
     public void ToSnakeCase_ShouldReturnStringIfEmpty()
     {
@@ -24,7 +25,8 @@ namespace PayloadLogging.Common.UnitTest.Extensions
       var result = value.ToSnakeCase();
       result.Should().Be(expectedValue);
     }
-    #endregion
+
+    #endregion ToSnakeCase
 
     #region MinifyJson
 
@@ -49,6 +51,7 @@ namespace PayloadLogging.Common.UnitTest.Extensions
       var result = stringBuilder.ToString().MinifyJsonText();
       result.Should().Be("{\"Node1\":{\"Node2\":\"Value1\"}}");
     }
-    #endregion
+
+    #endregion MinifyJson
   }
 }

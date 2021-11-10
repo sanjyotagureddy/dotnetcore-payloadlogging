@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using PayloadLogging.Common.Models.PayloadLogging;
+﻿using PayloadLogging.Common.Models.PayloadLogging;
 using PayloadLogging.Common.RestClients.Interface;
 using RestSharp;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PayloadLogging.Common.UnitTest.Helpers
 {
@@ -15,6 +15,7 @@ namespace PayloadLogging.Common.UnitTest.Helpers
     {
       _restService = restService ?? throw new ArgumentNullException(nameof(restService));
     }
+
     public async Task<IRestResponse> Get(string url,
       string methodName,
       IDictionary<string, string> headers = null,

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Net;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.TestHost;
@@ -9,6 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PayloadLogging.Common.Settings;
 using RestSharp;
+using System;
+using System.Net;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace PayloadLogging.Common.IntegrationTest.MiddlewareTests

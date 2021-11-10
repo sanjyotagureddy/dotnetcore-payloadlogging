@@ -1,9 +1,9 @@
-﻿using System;
+﻿using PayloadLogging.Common.RestClients.Interface;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using PayloadLogging.Common.RestClients.Interface;
-using RestSharp;
 
 namespace PayloadLogging.Common.RestClients
 {
@@ -122,6 +122,6 @@ namespace PayloadLogging.Common.RestClients
       return request;
     }
 
-    #endregion
+    #endregion Private Methods
   }
 }

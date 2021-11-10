@@ -19,7 +19,8 @@ namespace PayloadLogging.Common
       services.TryAddSingleton(typeof(IRestService<>), typeof(RestService<>));
       return services;
     }
-    #endregion
+
+    #endregion IServiceCollections
 
     #region IApplicationBuilders
 
@@ -28,6 +29,6 @@ namespace PayloadLogging.Common
       return builder.UseMiddleware<PayloadLoggingMiddleware>();
     }
 
-    #endregion
+    #endregion IApplicationBuilders
   }
 }

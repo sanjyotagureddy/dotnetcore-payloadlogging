@@ -1,5 +1,6 @@
 ﻿namespace PayloadLogging.Common.Settings
 {
+  [System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "RCS1102:Make class static.", Justification = "<Pending>")]
   public class ApiSettings
   {
     public static string PayloadLoggingHost { get; set; }

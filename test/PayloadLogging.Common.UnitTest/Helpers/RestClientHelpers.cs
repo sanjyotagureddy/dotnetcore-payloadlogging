@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using PayloadLogging.Common.Models.PayloadLogging;
+﻿using PayloadLogging.Common.Models.PayloadLogging;
 using PayloadLogging.Common.Models.PayloadLogging.Enum;
+using System.Collections.Generic;
 
 namespace PayloadLogging.Common.UnitTest.Helpers
 {

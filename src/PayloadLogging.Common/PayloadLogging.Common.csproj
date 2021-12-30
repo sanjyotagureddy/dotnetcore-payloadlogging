@@ -11,7 +11,7 @@
 		<RepositoryUrl>https://github.com/sanjyotagureddy/PayloadLoggingApi</RepositoryUrl>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2021.2.2">
+		<PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2021.3.2">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -20,7 +20,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.IO.RecyclableMemoryStream" Version="2.2.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-		<PackageReference Include="RestSharp" Version="106.13.0" />
+		<PackageReference Include="RestSharp" Version="106.15.0" />
 	</ItemGroup>
 
 </Project>
